@@ -1,5 +1,8 @@
 <?php
 
+$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['tt_address']);
+$enableRTE = $extConf['enableRTE'];
+
 // ******************************************************************
 // This is the standard TypoScript address table, tt_address
 // ******************************************************************
@@ -324,7 +327,7 @@ $TCA['tt_address'] = array (
 		'1' => array('showitem' =>
 			'hidden,
 			--palette--;LLL:EXT:tt_address/locallang_tca.xml:tt_address_palette.name;name,
-			image, falimage, description,
+			image, falimage, description' . ($enableRTE ? ';;;richtext:rte_transform[flag=rte_enabled|mode=ts_css]' : '' ) . ',
 			--div--;LLL:EXT:tt_address/locallang_tca.xml:tt_address_tab.contact,
 				--palette--;LLL:EXT:tt_address/locallang_tca.xml:tt_address_palette.address;address_usa,
 				--palette--;LLL:EXT:tt_address/locallang_tca.xml:tt_address_palette.building;building,
