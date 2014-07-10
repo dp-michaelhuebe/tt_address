@@ -7,7 +7,7 @@
 $TCA['tt_address'] = array (
 	'ctrl' => $TCA['tt_address']['ctrl'],
 	'interface' => array (
-		'showRecordFieldList' => 'name,first_name,middle_name,last_name,address,building,room,city,zip,region,country,phone,fax,email,www,title,company,image'
+		'showRecordFieldList' => 'name,first_name,middle_name,last_name,address,building,room,city,zip,region,country,phone,fax,email,www,title,company,image,falimage'
 	),
 	'feInterface' => $TCA['tt_address']['feInterface'],
 	'columns' => array (
@@ -302,12 +302,29 @@ $TCA['tt_address'] = array (
 				'cols' => 48
 			)
 		),
+		'falimage' => array(
+			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.image',
+			'exclude' => 1,
+			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('falimage', array(
+				'appearance' => array(
+					'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
+				),
+				// custom configuration for displaying fields in the overlay/reference table
+				'foreign_types' => array(
+					'0' => array(
+						'showitem' => '
+							--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+							--palette--;;filePalette'
+					),
+				),
+			), $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'])
+		),
 	),
 	'types' => array (
 		'1' => array('showitem' =>
 			'hidden,
 			--palette--;LLL:EXT:tt_address/locallang_tca.xml:tt_address_palette.name;name,
-			image, description,
+			image, falimage, description,
 			--div--;LLL:EXT:tt_address/locallang_tca.xml:tt_address_tab.contact,
 				--palette--;LLL:EXT:tt_address/locallang_tca.xml:tt_address_palette.address;address_usa,
 				--palette--;LLL:EXT:tt_address/locallang_tca.xml:tt_address_palette.building;building,
@@ -366,4 +383,5 @@ $TCA['tt_address'] = array (
 		),
 	)
 );
+
 ?>

@@ -190,6 +190,13 @@ class Address extends AbstractEntity {
 	protected $image;
 
 	/**
+	 * falimage
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $falimage
+	 */
+	protected $falimage;
+
+	/**
 	 * Description
 	 * @var string
 	 */
@@ -204,6 +211,7 @@ class Address extends AbstractEntity {
 
 	public function __construct() {
 		$this->addressgroup = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->falimage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -744,6 +752,21 @@ class Address extends AbstractEntity {
 	 */
 	public function getAddressgroup() {
 		return $this->addressgroup;
+	}
+
+	/**
+	 * Returns the fal image
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $falimage
+	 */
+	public function getFalimage() {
+		if ($this->falimage) {
+			$falimage = $this->fileRepository->findByRelation('tt_address', 'falimage', $this->getUid());
+			if ($falimage) {
+				$this->falimage = array_shift($falimage);
+			}
+		}
+		return $this->falimage;
 	}
 
 }
