@@ -4,5 +4,6 @@
 	"description": "Address List",
 	"homepage": "http://www.typo3.org",
 	"license": ["GPL-2.0+"],
-	"version": "3.0.0-dev"
+	"version": "3.0.0@dev",
+	"minimum-stability": "dev",
 }
