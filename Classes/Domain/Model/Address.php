@@ -208,6 +208,11 @@ class Address extends AbstractEntity {
 	 */
 	protected $addressgroup;
 
+	/**
+	 * @var \TYPO3\CMS\Core\Resource\FileRepository
+	 * @inject
+	 */
+	protected $fileRepository;
 
 	public function __construct() {
 		$this->addressgroup = new Tx_Extbase_Persistence_ObjectStorage();
